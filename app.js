@@ -20,5 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     [width*2, width*2+1, width+1, width+2],
     [0, width, width+1, width*2+1]
   ]
-  console.log(zTetromino[3])
+
+
+  const tTetromino = [
+    [width, width+1, width+2, 1]
+  ]
+  console.log(tTetromino[0])
 })
