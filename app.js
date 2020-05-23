@@ -23,7 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const tTetromino = [
-    [width, width+1, width+2, 1]
+    [width, width+1, width+2, 1],
+    [1, width+1, width+2, width*2+1],
+    [width, width+1, width+2, width*2+1],
+    [width, 1, width+1, width*2+1]
   ]
-  console.log(tTetromino[0])
+
+  const oTetromino = [
+    [0, 1, width, width+1], //note that this repeats
+    [0, 1, width, width+1],
+    [0, 1, width, width+1],
+    [0, 1, width, width+1]
+  ]
+  console.log(oTetromino[0])
 })
