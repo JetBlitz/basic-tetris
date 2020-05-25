@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // draw the first rotation in the first tetromino
   function draw() {
-    // the current tetromino array has the value [1, 2. 11. 21]
+    // the current tetromino array has the value [1, 2, 11, 21]
     current.forEach(index => {
       // each div will contain a CSS class of tetromino to colour it blue
       // to choose which div will be blue, it will first need a currentPosition and the value of the index of the current array
