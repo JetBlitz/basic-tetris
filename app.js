@@ -47,23 +47,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.theTetrominoes = theTetrominoes;
 
   let currentPosition = 4
+  let currentRotation = 0
 
 
   // randomly select a Tetromino and its first rotation
-  let current = theTetrominoes[0][0]
+  let random = Math.floor(Math.random()*theTetrominoes.length)
+  console.log(random)
+  let current = theTetrominoes[random][currentRotation]
 
-  // draw the first rotation in the first tetromino
+  // draw the Tetromino
   function draw() {
-    // the current tetromino array has the value [1, 2, 11, 21]
+    // the current tetromino array (lTetromino[0]) has the value [1, 2, 11, 21]
     current.forEach(index => {
       // each div will contain a CSS class of tetromino to colour it blue
       // to choose which div will be blue, it will first need a currentPosition and the value of the index of the current array
       squares[currentPosition + index].classList.add('tetromino')
-
     })
-
   }
 
-  draw()
+  // undraw the Tetromino
+  function undraw() {
+    current.forEach(index => {
+      squares[currentPosition + index].classList.remove('tetromino')
+    })
+  }
 
 })
