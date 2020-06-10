@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // randomly select a Tetromino and its first rotation
   let random = Math.floor(Math.random() * theTetrominoes.length);
-  console.log(random);
+  console.log("Index " + random + " of theTetrominoes array");
   let current = theTetrominoes[random][currentRotation];
 
   // draw the Tetromino
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // make the tetromino move down every second
-  timerId = setInterval(moveDown, 1000);
+  timerId = setInterval(moveDown, 250);
 
   // move down function
   function moveDown() {
@@ -107,4 +107,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // move the tetromino left, unless at the edge or there is a blockage
+  function moveLeft() {
+    //remove the shape at its current location regardless where it is
+    undraw();
+
+    //if the most left square of the tetromino is on a square that is divisible by 10 and leaves a remainder of 0, then it returns TRUE that it is at the LEFT EDGE of the grid.
+    const isAtLeftEdge = current.some(
+      (index) => (currentPosition + index) % width === 0
+    );
+
+    //if it's NOT at the left edge, we can move it left
+    if (!isAtLeftEdge) currentPosition -= 1; //this is in-line syntax for if-statements (conditionals); read: if !isAtLeftEdge is true, currentPosition = currentPosition - 1. This will move our tetromino Left when we moveLeft().
+
+    //we want our tetromino to stop IF there's another tetromino already there that has already been frozen
+
+    //if some of the squares in our tetromino shape go into a space that contains the class "taken" while traveling left, move it back one space so it appears to not have moved. We want to do this for EVERY index in our tetromino shape.
+    if (
+      current.some((index) =>
+        squares[currentPosition + index].classList.contains("taken")
+      )
+    ) {
+      currentPosition += 1;
+    }
+
+    // draw the tetromino
+    draw();
+  }
 });
