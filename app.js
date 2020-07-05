@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(e.keyCode === 37) {
       moveLeft()
     } else if (e.keyCode === 38) {
-      // rotate
+      rotate()
     } else if (e.keyCode === 39) {
       moveRight()
     } else if (e.keyCode === 40) {
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     undraw();
 
     //if the most left square of the tetromino is on a square that is divisible by 10 and leaves a remainder of 0, then it returns TRUE that it is at the LEFT EDGE of the grid.
-    const isAtLeftEdge = current.some((index) => (currentPosition + index) % width === 0);
+    const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0);
 
     //if it's NOT at the left edge, we can move it left
     if (!isAtLeftEdge) currentPosition -= 1; //  this is in-line syntax for if-statements (conditionals); read: if !isAtLeftEdge is true, currentPosition = currentPosition - 1. This will move our tetromino Left when we moveLeft().
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //we want our tetromino to stop IF there's another tetromino already there that has already been frozen
 
     //if some of the squares in our tetromino shape go into a space that contains the class "taken" while traveling left, move it back one space so it appears to not have moved. We want to do this for EVERY index in our tetromino shape.
-    if (current.some((index) => squares[currentPosition + index].classList.contains("taken"))) {
+    if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       currentPosition += 1;
     }
 
@@ -145,14 +145,25 @@ document.addEventListener("DOMContentLoaded", () => {
 // move the tetromino right, unless is at the edge or there is a blockage
 function moveRight() {
   undraw()
-  const isAtRightEdge = current.some(index => (currentPosition + index) % width === width -1)
+  const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
 
   if(!isAtRightEdge) currentPosition += 1
 
-  if(current.some(index => square[currentPosition + index].classList.constains('taken'))) {
+  if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
     currentPosition -= 1
   }
   draw()
 }
+
+  // rotate the Tetromino
+  function rotate() {
+    undraw()
+    currentRotation ++
+    if (currentRotation === current.length) { // if the current rotation gets to 4, make it go back to 0
+      currentRotation = 0
+    }
+    current = theTetrominoes[random][currentRotation]
+    draw()
+  }
 
 });
